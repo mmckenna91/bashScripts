@@ -1,0 +1,27 @@
+#!/bin/bash
+
+dlFolder=~/Desktop/$(date +%s)/
+mkdir $dlFolder
+artist=$(date -I)
+
+for ytUrl in "$@"
+  do
+    tpl="%(title)s.%(ext)s"
+    youtube-dl -o "$dlFolder$tpl" -f worst $ytUrl 
+  done
+
+for m4a in $dlFolder*
+  do
+    avconv -i "$m4a" "$m4a.mp3"
+    rm "$m4a"
+  done
+eyeD3 --artist=$artist $dlFolder*
+
+bbFolder="/media/BLACKBERRY/BLACKBERRY/podcasts/"
+if [ -d $bbFolder ]; then
+  mv $dlFolder* $bbFolder
+  rm -rf $dlFolder
+else
+  echo "Couldn't find bb podcast folder. Mp3s saved in $dlFolder"
+fi
+
