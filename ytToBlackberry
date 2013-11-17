@@ -2,7 +2,7 @@
 
 dlFolder=~/Desktop/$(date +%s)/
 mkdir $dlFolder
-artist=$(date -I)
+tag=$(date -I)
 
 for ytUrl in "$@"
   do
@@ -15,7 +15,7 @@ for m4a in $dlFolder*
     avconv -i "$m4a" "$m4a.mp3"
     rm "$m4a"
   done
-eyeD3 --artist=$artist $dlFolder*
+eyeD3 --artist=$tag --album=$tag $dlFolder*
 
 bbFolder="/media/BLACKBERRY/BLACKBERRY/podcasts/"
 if [ -d $bbFolder ]; then
