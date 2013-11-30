@@ -19,7 +19,7 @@ eyeD3 --artist=$tag --album=$tag $dlFolder*
 
 bbFolder="/media/BLACKBERRY/BLACKBERRY/podcasts/"
 if [ -d $bbFolder ]; then
-  mv $dlFolder* $bbFolder
+  mv -v $dlFolder* $bbFolder
   rm -rf $dlFolder
 else
   echo "Couldn't find bb podcast folder. Mp3s saved in $dlFolder"
